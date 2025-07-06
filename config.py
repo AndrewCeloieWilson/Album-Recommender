@@ -8,7 +8,7 @@ RAW_DIR = os.path.join(DATA_DIR, 'raw')
 OUTPUT_DIR = os.path.join(DATA_DIR, 'output')
 
 # API
-HEADERS = {"User-Agent": "AlbumRecommender/1.0 (437andrew@gmail.com)"}
+HEADERS = {"User-Agent": "AlbumRecommender/1.0 (Your-Email-Address)"}
 ACOUSTIC_BRAINZ_BASE_URL = "https://acousticbrainz.org"
 MUSIC_BRAINZ_BASE_URL = "https://musicbrainz.org"
 
