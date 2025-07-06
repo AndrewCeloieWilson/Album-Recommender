@@ -10,9 +10,8 @@ Using the included dataset of 1500 songs split fairly evenly (52%) between liked
 ## Features
 
 === STEP 1: Data Extraction ===
--This function reads your 'my_liked_and_disliked_tracks.csv' from the raw data folder and gathers associated audio features from Acoustic Brainz and Music Brainz. 
 
--A set of 1500 liked and disliked songs has already been included, as well as the raw data this method extracts. This can be used without modification. If you want to train the neural network using that data, you can skip directly to the training step.
+This function reads your 'my_liked_and_disliked_tracks.csv' from the raw data folder and gathers associated audio features from Acoustic Brainz and Music Brainz. A set of 1500 liked and disliked songs has already been included, as well as the raw data this method extracts. This can be used without modification. If you want to train the neural network using that data, you can skip directly to the training step.
 
 If you want to use your own data, you need to update the 'my_liked_and_disliked_tracks.csv' file in data/raw.
 Your 'my_liked_and_disliked_tracks.csv' file needs to contain a column of 'mbid' IDs representing the unique music brainz ID of songs you like. A second column 'liked' should include a 1 or 0 representing if you like or dislike the given song. Ideally, include about 50% liked and 50% disliked songs.
@@ -21,8 +20,11 @@ For each track, this function fetches detailed audio features from AcousticBrain
 and saves an enriched CSV file including all features. This CSV will be saved in data/raw and will be the base dataset for training.
 
 === STEP 2: Model Training ===
-Train the model on the extracted and transformed dataset.
+
+Train the model on the extracted and transformed dataset, as well as the model set up in src/model.py.
+If desired you can update the model structure in src/model.py to try out different numbers of layers, different activation functions, etc. 
 This function performs:
+
 - Loading and cleaning the raw feature CSV
 - Scaling numeric features with MinMaxScaler and saving the scaler object to scaler.joblib
 - Encoding categorical variables (like musical key and scale)
@@ -43,10 +45,12 @@ This function performs:
 - TARGET_TEST_ACCURACY = Early stopping threshold: If test accuracy reaches this percentage, stop training and save the model.
 
 === STEP 3: Output Model Data ===
+
 This function generates output based on the trained model and saves it in the data/output/weights folder
 Produces csv files that give information on bias, grouped importance of features, top 10 features, and weights per layer of the neural network These can be used to glean information about what the neural network learned from the dataset, how it is making recommendations, and why it has overfit or underfit the dataset.
 
 === STEP 4: Album Recommendation Search ===
+
 This function searches through MusicBrainz for albums matching your criteria:
 
 - It scores each song using the trained model's predictions
