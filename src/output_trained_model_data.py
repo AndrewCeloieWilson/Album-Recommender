@@ -67,13 +67,12 @@ def save_all_layer_weights_and_importance_to_csv(
             # Normalized importance
             importance_df['normalized'] = importance_df['mean_abs_weight'] / importance_df['mean_abs_weight'].sum()
 
-            # Grouped importance if input labels are present
-            if input_labels:
+            # Only apply acoustic/genre grouping to the first layer
+            if layer_idx == 0 and input_labels:
                 importance_df['group'] = importance_df['input'].apply(
                     lambda x: 'genre' if x.startswith('genre_') else 'acoustic'
                 )
 
-                # Save grouped importance
                 grouped_df = importance_df.groupby('group')['mean_abs_weight'].sum().reset_index()
                 group_path = os.path.join(WEIGHTS_TARGET_DIRECTORY, f"layer_{layer_idx}_grouped_importance.csv")
                 grouped_df.to_csv(group_path, index=False)
