@@ -346,7 +346,7 @@ def search_for_album_you_like(
             skipped_songs = sum(1 for _, score in predictions if score == -1.0)
     
             # Decide whether to recommend the album based on thresholds
-            if liked_songs / len(predictions) > album_recommendation_threshold:
+            if liked_songs / len(predictions) >= album_recommendation_threshold:
                 # Recommended album
                 print_album_status(
                     album_name=album_name,
