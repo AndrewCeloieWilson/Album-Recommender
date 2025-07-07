@@ -3,9 +3,11 @@
 
 ## Overview
 
-This project is a machine learning system designed to recommend music albums based on user preferences. It leverages raw audio features extracted from your liked and disliked tracks and trains a binary classification neural network model to predict your music preferences. The model is then used to recommend albums that align with your taste.
+This project is a machine learning system designed to recommend music albums based on user preferences. It leverages raw audio features extracted from your liked and disliked tracks and trains a binary classification neural network model to predict your music preferences for specific songs. The model is then used to recommend albums that align with your taste by running each song through the neural network to make a recommendation, and then finding albums where a high percentage of songs are recommended.
 
-Using the included dataset of 1500 songs split fairly evenly (52%) between liked and disliked, I have been able to achieve an accuracy of about 85% prediction success on the train and test sets before the model begins to overfit. 
+Using the included dataset of 1500 songs split fairly evenly (52%) between liked and disliked, I have been able to achieve an accuracy of about 85% prediction success on the train and test sets before the model begins to overfit. During the process, I found that having many diverse data examples with an even split between liked and disliked was a key to training the model to learn effectively without overfitting. I also found that there was a key stopping point in training that allowed genre data to increase model accuracy without overfitting. At peak accuracy, the first layer of the network focuses on sorting by genre and the subsequent layers use acoustic information to make decisions. Thus, genre information is used as a high level filter before making more detailed decisions about each song. Using leaky ReLU over ReLU seemed to help slightly improve model accuracy. I also found that having a decent dropout set in each layer while balancing learning rate and Adams optimizer weight decay led to the best results.
+
+I think adding lyric data to this project would further increase accuracy. It would also benefit from data after 2022 (the latest data MusicBrainz and AcousticBrainz have). Updating the network to weight songs on a more nuanced scale than a simple binary would also be beneficial (1=hate, 5=okay, 10=love).
 
 ## Features
 
