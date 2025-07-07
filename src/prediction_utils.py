@@ -60,7 +60,7 @@ def gather_features_for_prediction(mbid: str) -> Optional[Dict[str, Any]]:
 
     time.sleep(1.0)
     metadata = get_metadata_features_from_music_brainz(mbid)
-    if not metadata:
+    if not metadata or not metadata.get("release_year"):
         # Optional add 'or not metadata.get("release_year")' if you are using release_year in your inputs
         # And want to only predict with data that includes the release_year 
         return None
